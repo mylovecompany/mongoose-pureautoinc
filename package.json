@@ -1,0 +1,29 @@
+{
+  "name": "mongoose-pureautoinc",
+  "description": "Creating of auto increment fields",
+  "version": "2012.1.0",
+  "author": {
+    "name": "MyLove Company, LLC"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "mongoose": ">=3.0.0",
+    "vows": "0.5.13"
+  },
+  "keywords": [
+    "mongoose",
+    "mongo",
+    "mongodb",
+    "auto-increment",
+    "increment",
+    "field"
+  ],
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mylovecompany/mongoose-pureautoinc.git"
+  },
+  "main": "./index.js"
+}
