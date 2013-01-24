@@ -38,7 +38,7 @@ Firstly, you need to `require` Mongoose and the plugin.
 var mongoose     = require('../node_modules/mongoose'),
     Schema       = mongoose.Schema,
     db           = mongoose.createConnection('127.0.0.1', 'yourDatabaseName'),
-    pureautoinc  = require('pureautoinc');
+    pureautoinc  = require('mongoose-pureautoinc');
 ~~~
 
 Secondly, you need to initialize the plugin, define your schema and connect the plugin to it.
@@ -50,7 +50,7 @@ var schema = new Schema({
     text:  String
 });
 
-schema.plugin(pureautoinc, {
+schema.plugin(pureautoinc.plugin, {
     model: 'Subscriber',
     field: 'recordNum'
 });
