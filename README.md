@@ -24,6 +24,7 @@ npm install mongoose-pureautoinc
 - `model` - required parameter, name of your Mongoose model
 - `field` - name of your field
 - `start` - first value of your field which will be used
+- `update` - whether to re-increment the value on each subsequent save. Defaults to `true`.
 
 
 ## How to use

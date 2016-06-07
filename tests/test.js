@@ -134,5 +134,61 @@ suite.addBatch({
 				}
 			}
 		}
+	},
+	
+	'When disabling increment field updates': {
+		topic: function () {
+
+			var schema = new Schema({
+				author: String,
+				text:  String
+			});
+
+			var pluginParameters = {
+				model: 'Publication',
+				field: 'sequenceNumber',
+				update: false
+			};
+
+			schema.plugin(pureautoinc.plugin, pluginParameters);
+
+			var Publication = db.model('Publication', schema);
+
+			var Test = {
+				model: db.model('Publication'),
+				pluginParameters: pluginParameters
+			};
+
+			var promise = new (events.EventEmitter);
+
+			var publication = new Test.model({
+				author: 'some author',
+				text:  'some text'
+			});
+
+			publication.save(function (err, pub) {
+				var initialAutoIncVal;
+				if (err) {
+					promise.emit('error', err);
+				}
+				else {
+					initialAutoIncVal = pub.sequenceNumber;
+					// Re-save the document to test if the auto inc value is incremented
+					pub.save(function (err, pub) {
+						if (err)
+							promise.emit('error', err);
+						else
+							promise.emit('success', pub, initialAutoIncVal);
+					});
+				}
+			});
+
+			return promise;
+		},
+		
+		'auto increment field isn\'t incremented on update': function (err, publication, initialAutoIncVal) {
+			assert.equal(publication.sequenceNumber, initialAutoIncVal);
+		}
+
 	}
 }).export(module);
